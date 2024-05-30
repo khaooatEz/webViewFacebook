@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ServiceService } from '../service.service';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogMovieComponent } from '../dialog-movie/dialog-movie.component';
 
 export interface list_dataMovie{
@@ -16,11 +17,12 @@ export interface list_dataMovie{
 })
 
 export class MainPageComponent {
+[x: string]: any;
   
   searchText:any;
   filterType:any;
 
-  constructor(private apiService : ServiceService, private dialogMovie : DialogMovieComponent ){}
+  constructor(private apiService : ServiceService,public dialog: MatDialog){}
 
   ngOnInit(): void {
     this.plusApi();
@@ -31,10 +33,12 @@ export class MainPageComponent {
       this.getData(id)
     }
   }
-
-  // openDialog(movieName: string) {
-  //   this.dialogMovie.openDialog(movieName);
-  // }
+  openDialog(): void {
+    this.dialog.open(DialogMovieComponent, {
+      width: '250px',
+    });
+  }
+  
 
   // plusApi() {
   //   this.apiService.getMultiplePages(1, 100).pipe(

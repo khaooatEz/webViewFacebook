@@ -37,7 +37,7 @@
                     <div class="mid-box">
                         <div class="card-content">
                             <div class="column-card" *ngFor="let movie of displayedMovies || dataMovie ">
-                                <div class="card-movie">
+                                <div class="card-movie" (click)="openDialog()">
                                     <img [src]="movie.picture" alt="" class="image-Movie">
                                     <p>{{ movie.nameMovie }}</p>
                                     <p>ภาษา : {{ movie.language }}</p>

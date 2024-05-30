@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { DialogMovieComponent } from './dialog-movie/dialog-movie.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { DialogMovieComponent } from './dialog-movie/dialog-movie.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MatDialogModule,
     FormsModule
   ],
   providers: [],
