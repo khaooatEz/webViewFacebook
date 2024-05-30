@@ -10,6 +10,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { DialogMovieComponent } from './dialog-movie/dialog-movie.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
     WelcomePageComponent,
     NavBarComponent,
     RegisterPageComponent,
+    DialogMovieComponent,
   ],
   imports: [
     BrowserModule,

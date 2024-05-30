@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ServiceService } from '../service.service';
+import { DialogMovieComponent } from '../dialog-movie/dialog-movie.component';
 
 export interface list_dataMovie{
   picture : any;
@@ -19,7 +20,7 @@ export class MainPageComponent {
   searchText:any;
   filterType:any;
 
-  constructor(private apiService : ServiceService ){}
+  constructor(private apiService : ServiceService, private dialogMovie : DialogMovieComponent ){}
 
   ngOnInit(): void {
     this.plusApi();
@@ -29,6 +30,10 @@ export class MainPageComponent {
     for(let id =1 ; id<=100; id++){
       this.getData(id)
     }
+  }
+
+  openDialog(movieName: string) {
+    this.dialogMovie.openDialog(movieName);
   }
 
   // plusApi() {
