@@ -1,0 +1,110 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: 'Kanit';
+    background-image: url('../../assets/backgroundsky.jpg');
+}
+.top{
+    display: flex;
+    flex: 1;
+    align-items:end;
+    justify-content: center;
+    opacity: 1;
+    transition: 0.5s ease;
+    animation: slideDown 1s ease;
+}
+
+.profileImg{
+    height: 160px;
+    width: 200px;
+    border-radius: 20px;
+}
+
+.textHead{
+    color: rgb(52, 201, 255);
+}
+
+@keyframes slideDown{
+    from{
+        margin-top: -100px;
+        opacity: 0;
+    }
+    to{
+        margin-top: 0;
+        opacity: 1;
+    }
+}
+
+.bottom{
+    display: flex;
+    flex: 2;
+    justify-content: center;
+    transition: 0.1s ease;
+    animation: slideDown 1s ease;
+}
+
+
+.textInput{
+    border-radius: 40px;
+    border: none;
+    width: 300px;
+    height: 35px;
+    padding: 5px 15px 5px 15px;
+}
+
+.textEmail{
+    color: rgb(52, 201, 255);
+}
+
+.textPassword{
+    color: rgb(52, 201, 255);
+}
+
+.box-login{
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(315deg, #F5F4F4, #FFFFFF) ;
+    margin-top: 30px;
+    border-radius: 47px;
+    box-shadow:  10px 10px 30px 10px #E5E5E5;
+    align-items: center;
+    padding: 10px 40px 50px 40px;
+            
+}
+
+.btn-nextPage{
+    font-family: 'Kanit';
+    margin-top: 40px;
+    border: none;
+    border-radius: 40px;
+    background-color: rgb(240, 240, 240);
+    font-size: 20px;
+    padding: 10px 30px 10px 30px;
+    color: rgb(2, 204, 255);
+    
+}
+
+.btn-nextPage:hover{
+    background-color: rgb(65, 228, 65);
+    color: white;
+}
+
+.email{
+    margin-bottom: 10px;
+}
+
+.message-error{
+    font-size: 12px;
+    color: red;
+}
+
+.inputEmail{
+    display: flex;
+    flex-direction: column;
+}
+
+.inputPassword{
+    display: flex;
+    flex-direction: column;
+}

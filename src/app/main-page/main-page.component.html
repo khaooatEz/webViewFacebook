@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <app-nav-bar></app-nav-bar>
+        <div class="top-content">
+            <h1>Movies lnwza007</h1>
+        </div>
+        <div class="body-content">
+            <div class="left-content">
+                <div class="box-menu">
+                    <div class="list-menu">
+                        <p>เลือกประเภท</p>
+                        <button (click)="setFilterType('all')" class="btn-type">ทั้งหมด</button>
+                        <button (click)="setFilterType('en')" class="btn-type">หนังฝรั่ง</button>
+                        <button (click)="setFilterType('หนังเกาหลี')" class="btn-type">หนังเกาหลี</button>
+                        <button (click)="setFilterType('หนังญี่ปุ่น')" class="btn-type">หนังญี่ปุ่น</button>
+                        <button (click)="setFilterType('หนังฝรั่งเศษ')" class="btn-type">หนังฝรั่งเศษ</button>
+                    </div>            
+                </div>
+            </div>
+            <div class="right-content">
+                <div class="box-content">
+                    <div class="top-box">
+                        <div class="search-content">
+                            <div class="input-search">
+                                <input class="text-search" type="text" placeholder="ค้นหา.." [(ngModel)]="searchText">
+                            </div>
+                            <img class="icon-search" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 10a7 7 0 1 0 14 0a7 7 0 1 0-14 0m18 11l-6-6'/%3E%3C/svg%3E" alt="">
+                        </div>
+                    </div>
+                    <div class="mid-box">
+                        <div class="card-content">
+                            <div class="column-card" *ngFor="let movie of displayedMovies || dataMovie ">
+                                <div class="card-movie">
+                                    <img [src]="movie.picture" alt="" class="image-Movie">
+                                    <p>{{ movie.nameMovie }}</p>
+                                    <p>ภาษา : {{ movie.language }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pagination">
+                           <div class="btn-page">
+                            <button (click)="goToPage(page)" *ngFor="let page of displayedPages" [class.active]="currentPage === page">{{ page }}</button>
+                           </div>
+                        <div class="previous-next">
+                            <button class="btn-previous" (click)="previousPage()">Previous</button>
+                            <button class="btn-next" (click)="nextPage()">Next</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

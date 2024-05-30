@@ -1,0 +1,84 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Kanit';
+    background-image: url('../../assets/backgroundsky.jpg');
+    background-size: 100% 100%;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.box-menu{
+    background-color: white;
+    padding: 30px 40px 50px 40px;
+    display: flex;
+    border: 10px solid rgb(182, 240, 251);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30%;
+    opacity: 1;
+    transition: opacity 0.5s ease; /* กำหนดเอฟเฟกต์การเปลี่ยนแปลงความโปร่งใส */
+    animation: slideDown 1s ease; /* ใช้ animation สำหรับเลื่อนลงมา */
+}
+
+@keyframes slideDown {
+    from {
+        margin-top: -100px;
+        opacity: 0;
+    }
+    to {
+        margin-top: 0;
+        opacity: 1;
+    }
+}
+
+h1{
+    color: #2CC3FF;
+}
+.mid{
+    margin-top: 10px;
+}
+.logoImg{
+    width: 160px;
+}
+.bottom{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.btn-login{
+    font-family: 'Kanit';
+    padding: 15px 20px;
+    border-radius: 40px;
+    border: none;
+    box-shadow:  7px 10px 13px #bebebe,
+    -22px -22px 13px #ffffff;
+    color: #717171;
+}
+
+.btn-login:hover{
+    background-color: rgb(21, 255, 0);
+    padding: 15px 25px;
+    color: white;
+}
+
+.btn-register{
+    font-family: 'Kanit';
+    padding: 15px 20px;
+    border-radius: 40px;
+    border: none;
+    box-shadow:  7px 10px 13px #bebebe,
+    -22px -22px 13px #ffffff;
+    color: #717171;
+}
+
+.btn-register:hover{
+    background-color: rgb(47, 154, 248);
+    padding: 15px 25px;
+    color: white;
+}

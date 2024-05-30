@@ -1,0 +1,237 @@
+body {
+  font-family: "Kanit";
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-image: url("../../assets/backgroundsky.jpg");
+  background-position: center;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  overflow-y: auto;
+}
+.top-content {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
+  backdrop-filter: blur(5px);
+}
+
+.body-content {
+  display: flex;
+  flex-direction: row;
+  flex: 4;
+}
+
+.left-content {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  margin-top: 2rem;
+}
+
+.right-content {
+  display: flex;
+  flex: 3;
+  flex-direction: column;
+  margin: 1rem 1rem 1rem 1rem;
+}
+
+@media (max-width: 570px) {
+  .body-content {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .left-content {
+    order: 2;
+    margin-top: 1rem;
+  }
+
+  .box-menu {
+    margin: 0rem 1rem 0rem 1rem;
+    width: 100%;
+  }
+
+  .right-content {
+    order: 1;
+  }
+
+
+
+  .top-content {
+    font-size: 1rem;
+  }
+
+  .card-content {
+    margin-left: 1rem;
+  }
+  
+}
+
+.list-menu p {
+  font-size: 1.7rem;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10%;
+  padding: 1rem 1rem 1rem 1rem;
+}
+.list-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  padding: 0rem 1rem 1rem 1rem;
+  border-radius: 20px;
+}
+
+.btn-type {
+  font-size: 1rem;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10%;
+  font-family: "Kanit";
+  border: none;
+  padding: 1rem 1rem 1rem 1rem;
+}
+
+.btn-type:hover {
+  background-color: #7db9f8;
+  color: white;
+}
+.btn-type:active {
+  background-color: #4ca1fb;
+  color: white;
+}
+
+.right-content {
+  display: flex;
+  flex: 3;
+  flex-direction: row;
+  margin: 1rem 1rem 1rem 1rem;
+}
+
+.box-content {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 40px;
+  width: 100%;
+}
+
+.top-box {
+  display: flex;
+  flex-direction: row;
+  border-radius: 40px 40px 0px 0px;
+}
+.search-content {
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.4rem 0rem 0.7rem 1rem;
+}
+.text-search {
+  border-radius: 40px;
+  border: none;
+  font-family: "Kanit";
+  width: 20rem;
+  background-color: rgb(226, 226, 226);
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  font-size: 1rem;
+}
+.icon-search {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.mid-box {
+  padding: 0px 1rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.column-card {
+  width: calc(25% - 1rem);
+  margin-right: 1rem;
+}
+
+/* สำหรับหน้าจอขนาดกลาง */
+@media (max-width: 1024px) {
+  .column-card {
+    width: calc(33.33% - 1rem);
+  }
+}
+
+/* สำหรับหน้าจอขนาดเล็ก */
+@media (max-width: 768px) {
+  .column-card {
+    width: calc(50% - 1rem);
+  }
+  .text-search {
+    width: 17rem;
+  }
+  
+}
+.image-Movie {
+  width: 10rem;
+  height: 13rem;
+  border-radius: 10px;
+}
+
+.card-movie {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.card-movie p {
+  margin: 0rem 0rem 0rem 0rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  flex-direction: column;
+}
+
+.pagination button {
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #4ca1fb;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-next:hover {
+  background-color: rgb(115, 255, 115);
+}
+.btn-previous:hover {
+  background-color: rgb(255, 68, 68);
+}
+
+.btn-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.previous-next {
+  display: flex;
+  justify-content: center;
+}

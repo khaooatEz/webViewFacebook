@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="topBox">
+            <div class="top-left">
+                <img class="logoImg" src="assets/botnoiImg.png" alt="" />
+            </div>
+            <div class="top-mid"></div>
+            <div class="top-right"></div>
+        </div>
+        <div class="midBox">
+            <div class="mid-left"></div>
+            <div class="mid-mid">
+                <div class="box-register">
+                    <h2>From Register</h2>
+                    <form (ngSubmit)="onSubmit()">
+                        <div class="row-first-last">
+                            <div class="first">
+                                <div class="firstName">
+                                    <label for="firstName">ชื่อ</label>
+                                </div>
+                                <div class="input-first">
+                                    <input class="inputFirst" type="text" id="firstName" name="firstName"
+                                        [(ngModel)]="formData.firstName" required />
+                                    <span *ngIf="formData.firstName.trim() === '' && formInvalid"
+                                        class="message-error">*กรุณากรอกชื่อ</span>
+                                </div>
+                            </div>
+                            <div class="last">
+                                <div class="lastName">
+                                    <label for="lastName">นามสกุล</label>
+                                </div>
+                                <div class="input-last">
+                                    <input class="inputLast" type="text" id="lastName" name="lastName"
+                                        [(ngModel)]="formData.lastName" required />
+                                    <span *ngIf="formData.lastName.trim() === '' && formInvalid"
+                                        class="message-error">*กรุณากรอกนามสกุล</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-email-gender">
+                            <div class="email">
+                                <div class="email-text">
+                                    <label for="email">อีเมล</label>
+                                </div>
+                                <div class="input-email">
+                                    <input class="inputemail" type="text" id="email" name="email"
+                                        [(ngModel)]="formData.email" required />
+                                    <span *ngIf="formData.email.trim() === '' && formInvalid"
+                                        class="message-error">*กรุณากรอกอีเมล</span>
+                                    <span *ngIf="!isValidEmail() && isNextClicked && formData.email.trim() !== '' " class="message-error">*กรอกอีเมลให้ถูกต้อง</span>
+                                </div>
+                            </div>
+                            <div class="gender">
+                                <div class="gender-text">
+                                    <label for="gender">เพศ</label>
+                                </div>
+                                <div class="input-gender">
+                                    <select class="inputgender" name="gender" id="gender" [(ngModel)]="formData.gender"
+                                        required>
+                                        <option value="">กรุณาระบุ</option>
+                                        <option value="mail">ชาย</option>
+                                        <option value="female">หญิง</option>
+                                        <option value="LGBTQ">LGBTQ+</option>
+                                    </select>
+                                    <span *ngIf="formData.gender === '' && formInvalid"
+                                        class="message-error">*เลือกเพศ</span>
+                                </div>
+                            </div>
+                        </div>
+                       <div class="row-phone-age">
+                        <div class="phone">
+                            <div class="phone-text">
+                                <label for="phoneNumber">เบอร์โทร</label>
+                            </div>
+                            <div class="input-phone">
+                                <input class="inputphone" type="text" name="phoneNumber" id="phoneNumber"
+                                    [(ngModel)]="formData.phone" required (input)="checkPhone($event)" />
+                                <span *ngIf="phoneError && isNextClicked"
+                                    class="message-error">*กรุณากรอกเบอร์โทรให้ถูกต้อง</span>
+                                <span *ngIf="formData.phone.trim() === '' && formInvalid"
+                                    class="message-error">*กรุณากรอกเบอร์โทร</span>
+                            </div>
+                        </div>
+                        <div class="age">
+                            <div class="age-text">
+                                <label for="age">อายุ</label>
+                            </div>
+                            <div class="input-age">
+                                <input class="inputage" type="text" name="age" id="age" [(ngModel)]="formData.age"
+                                    required (input)="checkAge($event)" />
+                                <span *ngIf="ageError" class="message-error">*กรุณากรอกอายุให้ถูกต้อง</span>
+                                <span *ngIf="formData.age.trim() === '' && formInvalid"
+                                    class="message-error">*กรุณากรอกอายุ</span>
+                            </div>
+                        </div>
+                       </div>
+                       <div class="row-password-confirmpassword">
+                        <div class="password">
+                            <div class="password-text">
+                                <label for="password">รหัสผ่าน</label>
+                            </div>
+                            <div class="input-password">
+                                <input class="inputpassword" type="password" name="password" id="password"
+                                    [(ngModel)]="formData.password" [(ngModel)]="formData.password" required
+                                    (input)="checkPassword()" />
+                                <span *ngIf="formData.password.trim() === '' && formInvalid"
+                                    class="message-error">*กรุณากรอกรหัสผ่าน</span>
+                                <span *ngIf="passwordError && isNextClicked"
+                                    class="message-error">*กรุณากรอกรหัสผ่านมากกว่า 8 ตัว</span>
+                            </div>
+                        </div>
+                        <div class="confirmpassword">
+                            <div class="confirmpassword-text">
+                                <label for="confirmpassword">ยืนยันรหัสผ่าน</label>
+                            </div>
+                            <div class="input-confirmpassword">
+                                <input class="inputconfirmpassword" type="password" name="confirmpassword"
+                                    id="confirmpassword" [(ngModel)]="formData.confirmPassword" required />
+                                <span *ngIf="formData.confirmPassword.trim() === '' && formInvalid" class="message-error">*กรุณากรอกรหัสผ่านอีกครั้ง</span>
+                            </div>
+                        </div>
+                       </div>
+                        <div class="button-submitback">
+                            <div class="btn-submit">
+                                <button class="btnsubmit" type="submit" (click)="onSubmit()">
+                                    สมัคร
+                                </button>
+                            </div>
+                            <div class="btn-cancel">
+                                <button class="btncancel" type="button" (click)="cancel()">
+                                    ยกเลิก
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="mid-right"></div>
+        </div>
+        <div class="bottomBox">
+            <div class="bottom-left"></div>
+            <div class="bottom-mid"></div>
+            <div class="bottom-right"></div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'Messenger'));
+    
+        window.extAsyncInit = () => {
+            // TODO: How to parse env file from here?
+            MessengerExtensions.getSupportedFeatures(function success(result) {
+                let features = result.supported_features;
+                if (features.includes("context")) {
+                    MessengerExtensions.getContext('470349668784638',
+                        function success(thread_context) {
+                            // success
+                            document.getElementById("psid").value = thread_context.psid;
+                        },
+                        function error(err) {
+                            // error
+                            console.log(err);
+                        }
+                    );
+                }
+            }, function error(err) {
+                // error retrieving supported features
+                console.log(err);
+            });
+            document.getElementById('submitButton').addEventListener('click', () => {
+                MessengerExtensions.requestCloseBrowser(function success() {
+                    console.log("Webview closing");
+                }, function error(err) {
+                    console.log(err);
+                });
+            });
+        };
+    
+    </script>
+    <div class="container">
+        <div class="box-menu">
+            <div class="top">
+                <h1>Welcome Botnoi</h1>
+            </div>
+            <div class="mid">
+                <img class="logoImg" src="assets/botnoiImg.png" alt="">
+            </div>
+            <div class="bottom">
+                <button class="btn-login" routerLink="/login">Login</button>
+                <button class="btn-register" routerLink="/register">Register</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

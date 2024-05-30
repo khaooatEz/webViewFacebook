@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="top">
+            <div class="img">
+                <img class="profileImg" src="assets/profile.jpeg" alt="">
+            </div>
+        </div>
+        <div class="bottom">
+            <form (ngSubmit)="onSubmit()">
+                <div class="box-login">
+                    <div class="headText">
+                        <h1 class="textHead">Login to</h1>
+                    </div>
+                    <div class="email">
+                        <div class="textEmail">
+                            <label for="">Email</label>
+                        </div>
+                        <div class="inputEmail">
+                            <div class="inputEmail">
+                                <input class="textInput" type="text" name="email" id="email" [(ngModel)]="email">
+                                <span *ngIf=" email.trim() ==='' && formInvalid" class="message-error">*กรุณากรอกอีเมล</span>
+                                <span *ngIf=" !isValidEmail() && isNextClicked && email.trim() !== ''" class="message-error">*กรอกอีเมลให้ถูกต้อง</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="password">
+                        <div class="textPassword">
+                            <label for="">Password</label>
+                        </div>
+                        <div class="inputPassword">
+                            <input class="textInput" type="password" name="password" id="password" [(ngModel)]="password" (input)="checkPassword()">
+                            <span *ngIf=" password.trim() === '' && formInvalid" class="message-error">*กรุณากรอกรหัสผ่าน</span>
+                            <span *ngIf=" passwordError" class="message-error">*กรุณากรอกรหัสผ่านมากกว่า 8 ตัว</span>
+                        </div>
+                    </div>
+                    <div class="nextPage">
+                        <div class="buttonnextPage">
+                            <button class="btn-nextPage" type="submit" (click)="onSubmit()" >Login</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
