@@ -32,9 +32,9 @@ export class MainPageComponent {
     }
   }
 
-  openDialog(movieName: string) {
-    this.dialogMovie.openDialog(movieName);
-  }
+  // openDialog(movieName: string) {
+  //   this.dialogMovie.openDialog(movieName);
+  // }
 
   // plusApi() {
   //   this.apiService.getMultiplePages(1, 100).pipe(
