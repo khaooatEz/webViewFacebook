@@ -12,6 +12,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { DialogMovieComponent } from './dialog-movie/dialog-movie.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,9 +29,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     AppRoutingModule,
     HttpClientModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogMovieComponent]
+
 })
 export class AppModule { }

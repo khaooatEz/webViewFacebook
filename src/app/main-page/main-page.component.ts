@@ -33,9 +33,9 @@ export class MainPageComponent {
       this.getData(id)
     }
   }
+
   openDialog(): void {
     this.dialog.open(DialogMovieComponent, {
-      width: '250px',
     });
   }
   
