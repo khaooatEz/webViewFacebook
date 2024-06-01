@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-movie',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./dialog-movie.component.css']
 })
 export class DialogMovieComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogMovieComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ){}
 
 }

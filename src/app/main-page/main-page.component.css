@@ -85,6 +85,7 @@ body {
   background-color: rgb(255, 255, 255);
   border-radius: 10%;
   padding: 1rem 1rem 1rem 1rem;
+  margin-top: 1rem;
 }
 .list-menu {
   display: flex;

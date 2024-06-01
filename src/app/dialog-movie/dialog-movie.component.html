@@ -1,12 +1,50 @@
-<h2 mat-dialog-title>กรุณาระบุรายละเอียด</h2>
+<h2 mat-dialog-title class="head-content">กรุณาระบุรายละเอียด</h2>
 <mat-dialog-content>
   <div class="body-content">
-    <div class="type-chair"></div>
-    <div class="people-what"></div>
-    <div class="payment-what"></div>
+    <form action="">
+      <div class="type-chair">
+        <p>กรุณาเลือกประเภทที่นั่ง</p>
+        <div class="checkbox-type">
+          <div class="box-vip">
+            <input type="checkbox" name="" id="">
+            <label for="">VIP</label>
+          </div>
+          <div class="box-normal">
+            <input type="checkbox" name="" id="">
+            <label for="">Normal</label>
+          </div>
+        </div>
+      </div>
+      <div class="people-what">
+        <p>กรุณาระบุจำนวนที่นั่ง</p>
+        <select class="select-people" name="people" id="people" required>
+          <option value="">กรุณาระบุ</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </div>
+      <div class="payment-what">
+        <p>กรุณาเลือกวิธีชำระเงิน</p>
+        <select class="select-people" name="people" id="people" required>
+          <option value="">กรุณาระบุ</option>
+          <option value="1">พร้อมเพย์</option>
+          <option value="2">บัตรเครดิต</option>
+          <option value="3">บัตรทรูมันนี่</option>
+          <option value="4">ทรูมันนี่วอทเล็ท</option>
+        </select>
+      </div>
+    </form>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>ยืนยัน</button>
-  <button mat-button mat-dialog-close>ยกเลิก</button>
+<mat-dialog-actions class="button-container">
+  <button mat-button mat-dialog-close class="button-cancel">ยกเลิก</button>
+  <button mat-button mat-dialog-close class="button-access">ยืนยัน</button>
 </mat-dialog-actions>
