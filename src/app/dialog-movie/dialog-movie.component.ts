@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Inject} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
@@ -25,7 +26,8 @@ export class DialogMovieComponent {
 
   constructor(
     public dialogRef: MatDialogRef<DialogMovieComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private http: HttpClient
   ){}
 
   onSubmit() {
@@ -33,19 +35,27 @@ export class DialogMovieComponent {
       this.formInvalid = true;
       return;
     } else {
-      // ส่งข้อมูลกลับไปยัง chatbot Facebook
       let data = {
         picture: this.data.picture,
         nameMovie: this.data.nameMovie,
         typeChair: this.formDetail.typeChair,
         chair: this.formDetail.chair,
-        payMent: this.formDetail.payMent
+        payMent: this.formDetail.payMent,
+        psid: this.data.psid // assuming psid is passed in the data object
       };
-      window.opener.postMessage(data, '*');
-      window.close();
+
+      // ส่งข้อมูลกลับไปยังเซิร์ฟเวอร์
+      this.http.post('https://your-server.com/optionspostback', data).subscribe(
+        response => {
+          console.log('Booking information sent successfully', response);
+          window.close();
+        },
+        error => {
+          console.error('Error sending booking information', error);
+        }
+      );
     }
   }
-
   checkFormInvalid(): boolean {
     return (
       (this.formDetail.typeChair?.trim() === '' || this.formDetail.typeChair == null) ||
