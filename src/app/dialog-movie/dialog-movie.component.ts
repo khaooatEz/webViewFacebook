@@ -86,7 +86,7 @@ export class DialogMovieComponent implements OnInit {
   }
 
   sendConfirmationMessage(psid: string, message: string) {
-    const PAGE_ACCESS_TOKEN = 'EAAGrx9Dtmf4BOxSkwkwnLyXd5nZAIgyWEOZCPXFDBAe3LdqYCUltTlbyZCgZAEC2feYeZCVUGPYxZB24V5Y6X62BKUmIU7zONIleGDZCLYjhqZCwAVLhVa40Xy9vQ4USvZCaZCZA43H1LLZCLP0bZClEzGvTgfaJdEEEZBXnZC3OQZCxMXZAJ3YSIhW0x98s2nC5j8yh6by2nMo2j2ZAZAe8yTu3n7vxlDz1YW2Id4ZD';
+    const PAGE_ACCESS_TOKEN = 'EAAGrx9Dtmf4BO4fVSh4kopdsqITWARERX58dcZCnSf64XMBjGdTuGqdsSq3wxh0SYwNSZAVJEYWwW633SvnvFlvkMmsBFBczm8vx5jLD80zzZCkJZBi4z2NcQsWFEQIqtQ2ZA8wZAuuM0Snt8RpSnnAfYNVGzNZCpc4ySMHBt53BpsVcGBTM2pnfoO1C2yhh2k8VAZDZD';
     const url = `https://graph.facebook.com/v2.6/me/messages?access_token=${PAGE_ACCESS_TOKEN}`;
     const body = {
       recipient: { id: psid },
