@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-declare var MessengerExtensions: any;
 
 export interface form_detail {
   typeChair: string;
@@ -23,7 +22,6 @@ export class DialogMovieComponent implements OnInit {
   };
 
   formInvalid: boolean = false;
-  isMessengerExtensionsLoaded: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<DialogMovieComponent>,
@@ -32,25 +30,15 @@ export class DialogMovieComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.checkMessengerExtensionsLoaded().then(() => {
-      this.isMessengerExtensionsLoaded = true;
-    });
+    // Assume psid is passed in the data object
+    const psid = this.data.psid;
+    if (psid) {
+      const psidInput = document.getElementById('psid') as HTMLInputElement;
+      if (psidInput) {
+        psidInput.value = psid;
+      }
+    }
   }
-
-  checkMessengerExtensionsLoaded(): Promise<void> {
-    return new Promise((resolve) => {
-      const interval = setInterval(() => {
-        if (typeof MessengerExtensions !== 'undefined') {
-          console.log('MessengerExtensions is loaded');
-          clearInterval(interval);
-          resolve();
-        } else {
-          console.log('Waiting for MessengerExtensions to load...');
-        }
-      }, 100);
-    });
-  }
-
 
   onSubmit() {
     console.log("onSubmit called");
@@ -65,21 +53,14 @@ export class DialogMovieComponent implements OnInit {
         typeChair: this.formDetail.typeChair,
         chair: this.formDetail.chair,
         payMent: this.formDetail.payMent,
-        psid: this.data.psid
+        psid: this.data.psid // assuming psid is passed in the data object
       };
 
+      // ส่งข้อมูลกลับไปยังเซิร์ฟเวอร์
       this.http.post('https://bbcd-2001-fb1-c4-a1b5-612b-ba62-2e7b-12e6.ngrok-free.app/optionspostback', data).subscribe(
         response => {
           console.log('Booking information sent successfully', response);
-          if (this.isMessengerExtensionsLoaded) {
-            MessengerExtensions.requestCloseBrowser(function success() {
-              console.log("Webview closing");
-            }, function error(err: any) {
-              console.log(err);
-            });
-          } else {
-            console.error('MessengerExtensions is not defined');
-          }
+          window.close(); // Close the window without MessengerExtensions
         },
         error => {
           console.error('Error sending booking information', error);
