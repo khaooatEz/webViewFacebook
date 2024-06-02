@@ -8,14 +8,17 @@
       js.id = id;
       js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
       fjs.parentNode.insertBefore(js, fjs);
+      console.log("MessengerExtensions script added");
   }(document, 'script', 'Messenger'));
 
   window.extAsyncInit = () => {
+      console.log("MessengerExtensions loaded");
       MessengerExtensions.getSupportedFeatures(function success(result) {
           let features = result.supported_features;
           if (features.includes("context")) {
-              MessengerExtensions.getContext('<APP_ID>',
+              MessengerExtensions.getContext('470349668784638',
                   function success(thread_context) {
+                      console.log("Context obtained:", thread_context);
                       document.getElementById("psid").value = thread_context.psid;
                   },
                   function error(err) {
@@ -103,7 +106,7 @@
      </div>
       <mat-dialog-actions class="button-container">
         <button mat-button mat-dialog-close class="button-cancel">ยกเลิก</button>
-        <button mat-button class="button-access" type="submit" id="submitButton" (click)="onSubmit()">ยืนยัน</button>
+        <button mat-button class="button-access" type="submit" id="submitButton">ยืนยัน</button>
       </mat-dialog-actions>
     </form>
   </div>
