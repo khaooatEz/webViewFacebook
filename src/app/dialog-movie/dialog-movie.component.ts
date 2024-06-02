@@ -33,9 +33,18 @@ export class DialogMovieComponent {
       this.formInvalid = true;
       return;
     } else {
-      this.dialogRef.close(this.formDetail);
+      // ส่งข้อมูลกลับไปยัง chatbot Facebook
+      let data = {
+        picture: this.data.picture,
+        nameMovie: this.data.nameMovie,
+        typeChair: this.formDetail.typeChair,
+        chair: this.formDetail.chair,
+        payMent: this.formDetail.payMent
+      };
+      window.opener.postMessage(data, '*');
+      window.close();
     }
-  }
+}
 
   checkFormInvalid(): boolean {
     return (
