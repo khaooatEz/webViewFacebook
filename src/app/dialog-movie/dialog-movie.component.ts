@@ -16,6 +16,15 @@ export interface form_detail {
 })
 export class DialogMovieComponent {
 
+  ngOnInit() {
+    // ตรวจสอบให้แน่ใจว่า MessengerExtensions ถูกโหลดก่อนใช้งาน
+    if (typeof MessengerExtensions === 'undefined') {
+      console.error('MessengerExtensions is not loaded');
+    } else {
+      console.log('MessengerExtensions is loaded');
+    }
+  }
+
   formDetail: form_detail = {
     typeChair: '',
     chair: '',
@@ -50,11 +59,15 @@ export class DialogMovieComponent {
       this.http.post('https://bbcd-2001-fb1-c4-a1b5-612b-ba62-2e7b-12e6.ngrok-free.app/optionspostback', data).subscribe(
         response => {
           console.log('Booking information sent successfully', response);
-          MessengerExtensions.requestCloseBrowser(function success() {
-            console.log("Webview closing");
-          }, function error(err: any) {
-            console.log(err);
-          });
+          if (typeof MessengerExtensions !== 'undefined') {
+            MessengerExtensions.requestCloseBrowser(function success() {
+              console.log("Webview closing");
+            }, function error(err: any) {
+              console.log(err);
+            });
+          } else {
+            console.error('MessengerExtensions is not defined');
+          }
         },
         error => {
           console.error('Error sending booking information', error);
