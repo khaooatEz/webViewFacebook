@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 declare var MessengerExtensions: any;
 
@@ -14,16 +14,7 @@ export interface form_detail {
   templateUrl: './dialog-movie.component.html',
   styleUrls: ['./dialog-movie.component.css']
 })
-export class DialogMovieComponent {
-
-  ngOnInit() {
-    // ตรวจสอบให้แน่ใจว่า MessengerExtensions ถูกโหลดก่อนใช้งาน
-    if (typeof MessengerExtensions === 'undefined') {
-      console.error('MessengerExtensions is not loaded');
-    } else {
-      console.log('MessengerExtensions is loaded');
-    }
-  }
+export class DialogMovieComponent implements OnInit {
 
   formDetail: form_detail = {
     typeChair: '',
@@ -38,6 +29,15 @@ export class DialogMovieComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private http: HttpClient
   ) {}
+
+  ngOnInit() {
+    // ตรวจสอบให้แน่ใจว่า MessengerExtensions ถูกโหลดก่อนใช้งาน
+    if (typeof MessengerExtensions === 'undefined') {
+      console.error('MessengerExtensions is not loaded');
+    } else {
+      console.log('MessengerExtensions is loaded');
+    }
+  }
 
   onSubmit() {
     console.log("onSubmit called");
