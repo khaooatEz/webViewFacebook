@@ -1,67 +1,86 @@
 <h2 mat-dialog-title class="head-content">กรุณาระบุรายละเอียด</h2>
 <mat-dialog-content>
   <div class="body-content">
-    <div class="container-detailMovie">
-      <div class="container-img">
-        <img [src]="data.picture" alt="" class="img-movie">
-      </div>
-      <div class="detail-movie">
-        <p class="font-head">เรื่อง: </p>
-        <p> {{data.nameMovie}}</p>
-      </div>
-      <div class="detail-movie">
-        <p class="font-head">ภาษา: </p>
-        <p> {{data.language}}</p>
-      </div>
-        <p class="font-head">เนื้อเรื่องย่อ: </p>
-        <p> {{data.overView}}</p>
-    </div>
-   <div class="detail-buy">
-    <form action="">
-      <div class="type-chair">
-        <p class="font-head">กรุณาเลือกประเภทที่นั่ง</p>
-        <div class="checkbox-type">
-          <div class="box-vip">
-            <input type="checkbox" name="" id="">
-            <label for="">VIP</label>
-          </div>
-          <div class="box-normal">
-            <input type="checkbox" name="" id="">
-            <label for="">Normal</label>
-          </div>
+    <form (ngSubmit)="onSubmit()">
+      <div class="container-detailMovie">
+        <div class="container-img">
+          <img [src]="data.picture" alt="" class="img-movie">
         </div>
+        <div class="detail-movie">
+          <p class="font-head">เรื่อง: </p>
+          <p> {{data.nameMovie}}</p>
+        </div>
+        <div class="detail-movie">
+          <p class="font-head">ภาษา: </p>
+          <p> {{data.language}}</p>
+        </div>
+          <p class="font-head">เนื้อเรื่องย่อ: </p>
+          <p> {{data.overView}}</p>
       </div>
-      <div class="people-what">
-        <p class="font-head">กรุณาระบุจำนวนที่นั่ง</p>
-        <select class="select-people" name="people" id="people" required>
-          <option value="">กรุณาระบุ</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
-      </div>
-      <div class="payment-what">
-        <p class="font-head">กรุณาเลือกวิธีชำระเงิน</p>
-        <select class="select-people" name="people" id="people" required>
-          <option value="">กรุณาระบุ</option>
-          <option value="1">พร้อมเพย์</option>
-          <option value="2">บัตรเครดิต</option>
-          <option value="3">บัตรทรูมันนี่</option>
-          <option value="4">ทรูมันนี่วอทเล็ท</option>
-        </select>
-      </div>
+     <div class="detail-buy">
+        <div class="type-chair">
+          <p class="font-head">กรุณาเลือกประเภทที่นั่ง</p>
+          <div class="checkbox-type">
+            <div class="box-vip">
+              <input type="radio" value="VIP" name="typeChair" [(ngModel)]="formDetail.typeChair" required>
+              <label for="">VIP</label>
+            </div>
+            <div class="box-normal">
+              <input type="radio" name="type-chair" value="NORMAL" [(ngModel)]="formDetail.typeChair" required >
+              <label for="">Normal</label>
+            </div>
+          </div>
+          <br><span *ngIf="(formDetail.typeChair.trim() === '' || formDetail.typeChair == null) && formInvalid">*กรุณาระบุประเภทที่นั่ง</span>
+        </div>
+        <div class="people-what">
+          <p class="font-head">กรุณาระบุจำนวนที่นั่ง</p>
+          <select class="select-people" name="people" id="people" [(ngModel)]="formDetail.chair" required>
+            <option value="">กรุณาระบุ</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select><br>
+          <span *ngIf="(formDetail.chair.trim() === '' || formDetail.chair == null) && formInvalid">*กรุณาระบุจำนวนที่นั่ง</span>
+        </div>
+        <div class="payment-what">
+          <p class="font-head">กรุณาเลือกวิธีชำระเงิน</p>
+          <select class="select-people" name="people" id="people" [(ngModel)]="formDetail.payMent" required>
+            <option value="">กรุณาระบุ</option>
+            <option value="1">พร้อมเพย์</option>
+            <option value="2">บัตรเครดิต</option>
+            <option value="3">บัตรทรูมันนี่</option>
+            <option value="4">ทรูมันนี่วอทเล็ท</option>
+          </select><br>
+          <span *ngIf="(formDetail.payMent.trim() === '' || formDetail.payMent == null) && formInvalid">*กรุณาเลือกวิธีชำระเงิน</span>
+        </div>
+     </div>
+      <mat-dialog-actions class="button-container">
+        <button mat-button mat-dialog-close class="button-cancel">ยกเลิก</button>
+        <button mat-button class="button-access" (click)="onSubmit()" type="submit">ยืนยัน</button>
+        <script>
+          function onSubmit() {
+              // ปิดหน้าต่าง Webview
+              window.close();
+              
+              // ส่งข้อมูลกลับไปยัง chatbot Facebook
+              let data = {
+                  picture: "{{data.picture}}",
+                  nameMovie: "{{data.nameMovie}}",
+                  typeChair: "{{formDetail.typeChair}}",
+                  chair: "{{formDetail.chair}}",
+                  payMent: "{{formDetail.payMent}}"
+              };
+              window.opener.postMessage(data, '*');
+          }
+          </script>
+      </mat-dialog-actions>
     </form>
-   </div>
-    <mat-dialog-actions class="button-container">
-      <button mat-button mat-dialog-close class="button-cancel">ยกเลิก</button>
-      <button mat-button mat-dialog-close class="button-access">ยืนยัน</button>
-    </mat-dialog-actions>
   </div>
 </mat-dialog-content>
