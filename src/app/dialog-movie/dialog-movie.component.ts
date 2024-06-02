@@ -28,7 +28,7 @@ export class DialogMovieComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ){}
 
-  onSubmit(){
+  onSubmit() {
     if (this.checkFormInvalid()) {
       this.formInvalid = true;
       return;
@@ -44,7 +44,7 @@ export class DialogMovieComponent {
       window.opener.postMessage(data, '*');
       window.close();
     }
-}
+  }
 
   checkFormInvalid(): boolean {
     return (
