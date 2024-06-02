@@ -32,20 +32,25 @@ export class DialogMovieComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.checkMessengerExtensionsLoaded();
+    this.checkMessengerExtensionsLoaded().then(() => {
+      this.isMessengerExtensionsLoaded = true;
+    });
   }
 
-  checkMessengerExtensionsLoaded() {
-    const interval = setInterval(() => {
-      if (typeof MessengerExtensions !== 'undefined') {
-        console.log('MessengerExtensions is loaded');
-        this.isMessengerExtensionsLoaded = true;
-        clearInterval(interval);
-      } else {
-        console.log('Waiting for MessengerExtensions to load...');
-      }
-    }, 100);
+  checkMessengerExtensionsLoaded(): Promise<void> {
+    return new Promise((resolve) => {
+      const interval = setInterval(() => {
+        if (typeof MessengerExtensions !== 'undefined') {
+          console.log('MessengerExtensions is loaded');
+          clearInterval(interval);
+          resolve();
+        } else {
+          console.log('Waiting for MessengerExtensions to load...');
+        }
+      }, 100);
+    });
   }
+
 
   onSubmit() {
     console.log("onSubmit called");
