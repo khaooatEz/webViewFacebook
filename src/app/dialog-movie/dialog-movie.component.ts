@@ -94,6 +94,8 @@ export class DialogMovieComponent implements OnInit {
       recipient: { id: psid },
       message: { text: message }
     };
+
+    console.log('Sending confirmation message with payload:', body); // Log payload for debugging
     return this.http.post(url, body);
   }
 }
