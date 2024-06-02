@@ -23,6 +23,7 @@ export class DialogMovieComponent implements OnInit {
   };
 
   formInvalid: boolean = false;
+  isMessengerExtensionsLoaded: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<DialogMovieComponent>,
@@ -31,12 +32,19 @@ export class DialogMovieComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // ตรวจสอบให้แน่ใจว่า MessengerExtensions ถูกโหลดก่อนใช้งาน
-    if (typeof MessengerExtensions === 'undefined') {
-      console.error('MessengerExtensions is not loaded');
-    } else {
-      console.log('MessengerExtensions is loaded');
-    }
+    this.checkMessengerExtensionsLoaded();
+  }
+
+  checkMessengerExtensionsLoaded() {
+    const interval = setInterval(() => {
+      if (typeof MessengerExtensions !== 'undefined') {
+        console.log('MessengerExtensions is loaded');
+        this.isMessengerExtensionsLoaded = true;
+        clearInterval(interval);
+      } else {
+        console.log('Waiting for MessengerExtensions to load...');
+      }
+    }, 100);
   }
 
   onSubmit() {
@@ -52,14 +60,13 @@ export class DialogMovieComponent implements OnInit {
         typeChair: this.formDetail.typeChair,
         chair: this.formDetail.chair,
         payMent: this.formDetail.payMent,
-        psid: this.data.psid // assuming psid is passed in the data object
+        psid: this.data.psid
       };
 
-      // ส่งข้อมูลกลับไปยังเซิร์ฟเวอร์
       this.http.post('https://bbcd-2001-fb1-c4-a1b5-612b-ba62-2e7b-12e6.ngrok-free.app/optionspostback', data).subscribe(
         response => {
           console.log('Booking information sent successfully', response);
-          if (typeof MessengerExtensions !== 'undefined') {
+          if (this.isMessengerExtensionsLoaded) {
             MessengerExtensions.requestCloseBrowser(function success() {
               console.log("Webview closing");
             }, function error(err: any) {
