@@ -48,7 +48,6 @@ export class DialogMovieComponent implements OnInit {
       return;
     } else {
       let data = {
-        picture: this.data.picture,
         nameMovie: this.data.nameMovie,
         typeChair: this.formDetail.typeChair,
         chair: this.formDetail.chair,
