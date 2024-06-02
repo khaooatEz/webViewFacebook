@@ -48,6 +48,7 @@ export class DialogMovieComponent implements OnInit {
       return;
     } else {
       let data = {
+        picture: this.data.picture,
         nameMovie: this.data.nameMovie,
         typeChair: this.formDetail.typeChair,
         chair: this.formDetail.chair,
@@ -59,7 +60,17 @@ export class DialogMovieComponent implements OnInit {
       this.http.post('https://bbcd-2001-fb1-c4-a1b5-612b-ba62-2e7b-12e6.ngrok-free.app/optionspostback', data).subscribe(
         response => {
           console.log('Booking information sent successfully', response);
-          window.close(); // Close the window without MessengerExtensions
+          // Use Messenger API to send a message back to the user
+          this.sendConfirmationMessage(this.data.psid, 'เสร็จสิ้นการจอง').subscribe(
+            res => {
+              console.log('Confirmation message sent successfully', res);
+              window.close(); // Close the window
+            },
+            err => {
+              console.error('Error sending confirmation message', err);
+              window.close(); // Close the window even if there is an error
+            }
+          );
         },
         error => {
           console.error('Error sending booking information', error);
@@ -74,5 +85,15 @@ export class DialogMovieComponent implements OnInit {
       (this.formDetail.chair?.trim() === '' || this.formDetail.chair == null) ||
       (this.formDetail.payMent?.trim() === '' || this.formDetail.payMent == null)
     );
+  }
+
+  sendConfirmationMessage(psid: string, message: string) {
+    const PAGE_ACCESS_TOKEN = 'YOUR_PAGE_ACCESS_TOKEN';
+    const url = `https://graph.facebook.com/v2.6/me/messages?access_token=${PAGE_ACCESS_TOKEN}`;
+    const body = {
+      recipient: { id: psid },
+      message: { text: message }
+    };
+    return this.http.post(url, body);
   }
 }
