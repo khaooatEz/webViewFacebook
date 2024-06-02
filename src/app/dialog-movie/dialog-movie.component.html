@@ -15,10 +15,12 @@
           <p class="font-head">ภาษา: </p>
           <p> {{data.language}}</p>
         </div>
+        <div class="detail-movie">
           <p class="font-head">เนื้อเรื่องย่อ: </p>
           <p> {{data.overView}}</p>
+        </div>
       </div>
-     <div class="detail-buy">
+      <div class="detail-buy">
         <div class="type-chair">
           <p class="font-head">กรุณาเลือกประเภทที่นั่ง</p>
           <div class="checkbox-type">
@@ -27,7 +29,7 @@
               <label for="">VIP</label>
             </div>
             <div class="box-normal">
-              <input type="radio" name="type-chair" value="NORMAL" [(ngModel)]="formDetail.typeChair" required >
+              <input type="radio" name="typeChair" value="NORMAL" [(ngModel)]="formDetail.typeChair" required>
               <label for="">Normal</label>
             </div>
           </div>
@@ -61,7 +63,7 @@
           </select><br>
           <span *ngIf="(formDetail.payMent.trim() === '' || formDetail.payMent == null) && formInvalid">*กรุณาเลือกวิธีชำระเงิน</span>
         </div>
-     </div>
+      </div>
       <mat-dialog-actions class="button-container">
         <button mat-button mat-dialog-close class="button-cancel">ยกเลิก</button>
         <button mat-button class="button-access" type="submit" id="submitButton">ยืนยัน</button>
