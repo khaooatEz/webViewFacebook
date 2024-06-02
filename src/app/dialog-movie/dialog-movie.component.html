@@ -1,5 +1,23 @@
 <h2 mat-dialog-title class="head-content">กรุณาระบุรายละเอียด</h2>
 <mat-dialog-content>
+  <script>
+    function sendMessageToParent() {
+        let nameMovie = document.getElementById('nameMovie').value;
+        let typeChair = document.getElementById('typeChair').value;
+        let chair = document.getElementById('chair').value;
+        let psid = new URLSearchParams(window.location.search).get('psid');
+
+        let data = {
+            nameMovie: nameMovie,
+            typeChair: typeChair,
+            chair: chair,
+            psid: psid
+        };
+
+        window.opener.postMessage(data, '*');
+        window.close();
+    }
+</script>
   <div class="body-content">
     <form (ngSubmit)="onSubmit()">
       <div class="container-detailMovie">
@@ -63,7 +81,7 @@
      </div>
       <mat-dialog-actions class="button-container">
         <button mat-button mat-dialog-close class="button-cancel">ยกเลิก</button>
-        <button mat-button class="button-access" (click)="onSubmit()" type="submit">ยืนยัน</button>
+        <button mat-button class="button-access" click="sendMessageToParent()" type="submit">ยืนยัน</button>
       </mat-dialog-actions>
     </form>
   </div>
