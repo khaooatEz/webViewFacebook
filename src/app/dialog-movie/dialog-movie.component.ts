@@ -30,7 +30,6 @@ export class DialogMovieComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Assume psid is passed in the data object
     const psid = this.data.psid;
     if (psid) {
       const psidInput = document.getElementById('psid') as HTMLInputElement;
