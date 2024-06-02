@@ -15,10 +15,8 @@
           <p class="font-head">ภาษา: </p>
           <p> {{data.language}}</p>
         </div>
-        <div class="detail-movie">
-          <p class="font-head">เนื้อเรื่องย่อ: </p>
-          <p> {{data.overView}}</p>
-        </div>
+        <p class="font-head">เนื้อเรื่องย่อ: </p>
+        <p> {{data.overView}}</p>
       </div>
       <div class="detail-buy">
         <div class="type-chair">
@@ -29,7 +27,7 @@
               <label for="">VIP</label>
             </div>
             <div class="box-normal">
-              <input type="radio" name="typeChair" value="NORMAL" [(ngModel)]="formDetail.typeChair" required>
+              <input type="radio" name="type-chair" value="NORMAL" [(ngModel)]="formDetail.typeChair" required>
               <label for="">Normal</label>
             </div>
           </div>
