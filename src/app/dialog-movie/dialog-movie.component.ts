@@ -1,13 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
+import { ActivatedRoute } from '@angular/router';
 
 export interface form_detail {
     typeChair: string;
     chair: string;
     payMent: string;
-    psid: string;  // เพิ่ม psid ใน formDetail
+    psid: string;
 }
 
 @Component({
@@ -21,7 +21,7 @@ export class DialogMovieComponent implements OnInit {
         typeChair: '',
         chair: '',
         payMent: '',
-        psid: ''  // เพิ่ม psid ใน formDetail
+        psid: ''
     };
 
     formInvalid: boolean = false;
@@ -30,15 +30,16 @@ export class DialogMovieComponent implements OnInit {
         public dialogRef: MatDialogRef<DialogMovieComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
         private http: HttpClient,
-        private route: ActivatedRoute // Inject ActivatedRoute
+        private route: ActivatedRoute
     ) {}
 
     ngOnInit() {
-        // ดึง PSID จาก URL
         this.route.queryParams.subscribe(params => {
             const psid = params['psid'];
             if (psid) {
                 this.formDetail.psid = psid;
+            } else {
+                console.error('PSID is missing in URL');
             }
         });
     }
@@ -56,22 +57,20 @@ export class DialogMovieComponent implements OnInit {
                 typeChair: this.formDetail.typeChair,
                 chair: this.formDetail.chair,
                 payMent: this.formDetail.payMent,
-                psid: this.formDetail.psid // ส่ง psid ใน request
+                psid: this.formDetail.psid
             };
 
-            // ส่งข้อมูลกลับไปยังเซิร์ฟเวอร์
             this.http.post('https://bbcd-2001-fb1-c4-a1b5-612b-ba62-2e7b-12e6.ngrok-free.app/optionspostback', data).subscribe(
                 response => {
                     console.log('Booking information sent successfully', response);
-                    // Use Messenger API to send a message back to the user
                     this.sendConfirmationMessage(this.formDetail.psid, 'เสร็จสิ้นการจอง').subscribe(
                         res => {
                             console.log('Confirmation message sent successfully', res);
-                            window.close(); // Close the window
+                            window.close();
                         },
                         err => {
                             console.error('Error sending confirmation message', err);
-                            window.close(); // Close the window even if there is an error
+                            window.close();
                         }
                     );
                 },
@@ -98,7 +97,7 @@ export class DialogMovieComponent implements OnInit {
             message: { text: message }
         };
 
-        console.log('Sending confirmation message with payload:', body); // Log payload for debugging
+        console.log('Sending confirmation message with payload:', body);
         return this.http.post(url, body);
     }
 }
