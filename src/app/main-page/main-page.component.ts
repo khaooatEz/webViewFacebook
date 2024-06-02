@@ -33,14 +33,16 @@ export class MainPageComponent {
     }
   }
 
-  public openDialog(movie: { nameMovie: any; language: any; }): void {
-    this.dialog.open(DialogMovieComponent, {
-      data: {
-        nameMovie: movie.nameMovie,
-        language: movie.language,
-      }
-    });
-  }
+  openDialog(movie: { nameMovie: any; language: any; overView: any; picture: any }): void {
+  this.dialog.open(DialogMovieComponent, {
+    data: {
+      nameMovie: movie.nameMovie,
+      language: movie.language,
+      overView: movie.overView,
+      picture: movie.picture,
+    }
+  });
+}
 
 
   // plusApi() {

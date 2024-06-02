@@ -15,11 +15,17 @@
   font-family: 'Kanit';
   display: flex;
   flex-direction: column;
+  width: 30rem;
+  max-width: 100vw;
+}
+
+.container-detailMovie p{
+  margin: 0;
 }
 
 .button-container{
-  margin-left: 10rem;
-  gap: 5px;
+  margin-left: auto;
+  gap: 8px;
 }
 
 .button-access{
@@ -30,6 +36,8 @@
   border: none;
   padding: 3px 0.7rem;
   font-family: 'Kanit';
+  width: 6rem;
+  height: 3rem;
 }
 
 .button-access:active{
@@ -49,6 +57,8 @@
   border: none;
   padding: 3px 0.7rem;
   font-family: 'Kanit';
+  width: 6rem;
+  height: 3rem;
 }
 
 .button-cancel:active{
@@ -64,4 +74,45 @@
   display: flex;
   flex-direction: row;
   gap: 20px;
+}
+
+.font-head{
+  font-weight:bold;
+}
+
+.detail-movie {
+  display: flex;
+  max-height: 100px;
+  overflow: hidden;
+  position: relative;
+  transition: max-height 0.3s ease;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.container-img{
+  display: flex;
+  justify-content: center;
+}
+
+.img-movie{
+  height: 30rem;
+  width: 20rem;
+}
+
+@media (max-width: 550px){
+  .img-movie{
+    height: 15rem;
+    width: 10rem;
+  }
+
+  .container-img{
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .body-content{
+    width: 100%;
+  }
+
 }
