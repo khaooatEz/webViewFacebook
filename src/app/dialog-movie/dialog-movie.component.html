@@ -16,7 +16,7 @@
       MessengerExtensions.getSupportedFeatures(function success(result) {
           let features = result.supported_features;
           if (features.includes("context")) {
-              MessengerExtensions.getContext('<APP_ID>',
+              MessengerExtensions.getContext('470349668784638',
                   function success(thread_context) {
                       console.log("Context obtained:", thread_context);
                       document.getElementById("psid").value = thread_context.psid;
