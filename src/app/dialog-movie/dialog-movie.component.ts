@@ -52,11 +52,11 @@ export class DialogMovieComponent implements OnInit {
         typeChair: this.formDetail.typeChair,
         chair: this.formDetail.chair,
         payMent: this.formDetail.payMent,
-        psid: this.data.psid // assuming psid is passed in the data object
+        psid: this.data.psid
       };
 
       // ส่งข้อมูลกลับไปยังเซิร์ฟเวอร์
-      this.http.post('https://bbcd-2001-fb1-c4-a1b5-612b-ba62-2e7b-12e6.ngrok-free.app/optionspostback', data).subscribe(
+      this.http.post('https://your-ngrok-url.ngrok-free.app/optionspostback', data).subscribe(
         response => {
           console.log('Booking information sent successfully', response);
           // Use Messenger API to send a message back to the user
@@ -87,14 +87,14 @@ export class DialogMovieComponent implements OnInit {
   }
 
   sendConfirmationMessage(psid: string, message: string) {
-    const PAGE_ACCESS_TOKEN = 'EAAGrx9Dtmf4BOxSkwkwnLyXd5nZAIgyWEOZCPXFDBAe3LdqYCUltTlbyZCgZAEC2feYeZCVUGPYxZB24V5Y6X62BKUmIU7zONIleGDZCLYjhqZCwAVLhVa40Xy9vQ4USvZCaZCZA43H1LLZCLP0bZClEzGvTgfaJdEEEZBXnZC3OQZCxMXZAJ3YSIhW0x98s2nC5j8yh6by2nMo2j2ZAZAe8yTu3n7vxlDz1YW2Id4ZD';
+    const PAGE_ACCESS_TOKEN = 'EAAGrx9Dtmf4BOw9EirXaW2t4xeZB8MaiTUZBU7d7COdeGTp8pZCMSsxdaKY6e2NUhKlST9i7ZBNQDRKRWz83F9kvfGfUeGQ2sLvR6mk5bKbTX6NWN5ShCowkcbBKOJk6JXBZCrrrZCTZCZBUiALwQqPWpYKBRrgV4FP8OczjPZBYlFZAcffH23HOSUdHiYyx2M7NK4ygZDZD';
     const url = `https://graph.facebook.com/v2.6/me/messages?access_token=${PAGE_ACCESS_TOKEN}`;
     const body = {
       recipient: { id: psid },
       message: { text: message }
     };
 
-    console.log('Sending confirmation message with payload:', body); // Log payload for debugging
+    console.log('Sending confirmation message with payload:', body);
     return this.http.post(url, body);
   }
 }
