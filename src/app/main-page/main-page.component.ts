@@ -1,8 +1,7 @@
+import { Component } from '@angular/core';
 import { ServiceService } from '../service.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogMovieComponent } from '../dialog-movie/dialog-movie.component';
-import { ActivatedRoute } from '@angular/router';
-import { Component } from '@angular/core';
 
 export interface list_dataMovie {
   picture: any;
@@ -22,16 +21,10 @@ export class MainPageComponent {
   searchText: any;
   filterType: any;
 
-  constructor(private apiService: ServiceService, public dialog: MatDialog, private route: ActivatedRoute) { }
+  constructor(private apiService: ServiceService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.plusApi();
-    this.route.queryParams.subscribe(params => {
-      const psid = params['psid'];
-      if (psid) {
-        this.openDialogWithPSID(psid);
-      }
-    });
   }
 
   plusApi() {
@@ -40,27 +33,16 @@ export class MainPageComponent {
     }
   }
 
-  openDialog(movie: { nameMovie: any; language: any; overView: any; picture: any }, psid: string): void {
-    this.dialog.open(DialogMovieComponent, {
-      data: {
-        nameMovie: movie.nameMovie,
-        language: movie.language,
-        overView: movie.overView,
-        picture: movie.picture,
-        psid: psid
-      }
-    });
-  }
-
-openDialogWithPSID(psid: string): void {
-  if (this.dataMovie.length > 0) {
-    const movie = this.dataMovie[0]; // Assuming you want to open the dialog with the first movie
-    this.openDialog(movie, psid);
-  } else {
-    console.error('No movie data available to open dialog with PSID.');
-  }
+  openDialog(movie: { nameMovie: any; language: any; overView: any; picture: any }): void {
+  this.dialog.open(DialogMovieComponent, {
+    data: {
+      nameMovie: movie.nameMovie,
+      language: movie.language,
+      overView: movie.overView,
+      picture: movie.picture,
+    }
+  });
 }
-
 
 
   // plusApi() {
