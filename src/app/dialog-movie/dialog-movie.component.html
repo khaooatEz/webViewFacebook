@@ -64,22 +64,6 @@
       <mat-dialog-actions class="button-container">
         <button mat-button mat-dialog-close class="button-cancel">ยกเลิก</button>
         <button mat-button class="button-access" (click)="onSubmit()" type="submit">ยืนยัน</button>
-        <script>
-          function onSubmit() {
-              // ปิดหน้าต่าง Webview
-              window.close();
-              
-              // ส่งข้อมูลกลับไปยัง chatbot Facebook
-              let data = {
-                  picture: "{{data.picture}}",
-                  nameMovie: "{{data.nameMovie}}",
-                  typeChair: "{{formDetail.typeChair}}",
-                  chair: "{{formDetail.chair}}",
-                  payMent: "{{formDetail.payMent}}"
-              };
-              window.opener.postMessage(data, '*');
-          }
-          </script>
       </mat-dialog-actions>
     </form>
   </div>
