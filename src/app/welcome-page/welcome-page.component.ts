@@ -14,6 +14,7 @@ export class WelcomePageComponent implements OnInit {
     private psidService: PsidService
   ) {}
   ngOnInit() {
+    console.log('test')
     this.route.queryParams.subscribe(params => {
       const psid = params['psid'];
       if (psid) {
