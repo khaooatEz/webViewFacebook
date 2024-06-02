@@ -30,57 +30,47 @@ export class DialogMovieComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const psid = this.data.psid;
-    if (psid) {
-        const psidInput = document.getElementById('psid') as HTMLInputElement;
-        if (psidInput) {
-            psidInput.value = psid;
-        }
-        console.log("PSID received:", psid); // เพิ่มบรรทัดนี้
-    } else {
-        console.error("PSID is not available in data");
-    }
+    console.log("PSID received from data:", this.data.psid);
   }
 
   onSubmit() {
     console.log("onSubmit called");
-    console.log("Form data:", this.formDetail); // เพิ่มบรรทัดนี้
     if (this.checkFormInvalid()) {
-        this.formInvalid = true;
-        console.log("Form is invalid");
-        return;
+      this.formInvalid = true;
+      console.log("Form is invalid");
+      return;
     } else {
-        let data = {
-            picture: this.data.picture,
-            nameMovie: this.data.nameMovie,
-            typeChair: this.formDetail.typeChair,
-            chair: this.formDetail.chair,
-            payMent: this.formDetail.payMent,
-            psid: this.data.psid // เพิ่มบรรทัดนี้
-        };
+      let data = {
+        picture: this.data.picture,
+        nameMovie: this.data.nameMovie,
+        typeChair: this.formDetail.typeChair,
+        chair: this.formDetail.chair,
+        payMent: this.formDetail.payMent,
+        psid: this.data.psid // ใช้ psid จาก data
+      };
 
-        console.log("Submitting data:", data); // เพิ่มบรรทัดนี้
+      console.log("Submitting data:", data);
 
-        // ส่งข้อมูลกลับไปยังเซิร์ฟเวอร์
-        this.http.post('https://bbcd-2001-fb1-c4-a1b5-612b-ba62-2e7b-12e6.ngrok-free.app/optionspostback', data).subscribe(
-            response => {
-                console.log('Booking information sent successfully', response);
-                // Use Messenger API to send a message back to the user
-                this.sendConfirmationMessage(this.data.psid, 'เสร็จสิ้นการจอง').subscribe(
-                    res => {
-                        console.log('Confirmation message sent successfully', res);
-                        window.close(); // Close the window
-                    },
-                    err => {
-                        console.error('Error sending confirmation message', err);
-                        window.close(); // Close the window even if there is an error
-                    }
-                );
+      // ส่งข้อมูลกลับไปยังเซิร์ฟเวอร์
+      this.http.post('https://bbcd-2001-fb1-c4-a1b5-612b-ba62-2e7b-12e6.ngrok-free.app/optionspostback', data).subscribe(
+        response => {
+          console.log('Booking information sent successfully', response);
+          // Use Messenger API to send a message back to the user
+          this.sendConfirmationMessage(this.data.psid, 'เสร็จสิ้นการจอง').subscribe(
+            res => {
+              console.log('Confirmation message sent successfully', res);
+              window.close(); // Close the window
             },
-            error => {
-                console.error('Error sending booking information', error);
+            err => {
+              console.error('Error sending confirmation message', err);
+              window.close(); // Close the window even if there is an error
             }
-        );
+          );
+        },
+        error => {
+          console.error('Error sending booking information', error);
+        }
+      );
     }
   }
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ServiceService } from '../service.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogMovieComponent } from '../dialog-movie/dialog-movie.component';
+import { PsidService } from '../psid.service';
 
 export interface list_dataMovie {
   picture: any;
@@ -21,7 +22,7 @@ export class MainPageComponent {
   searchText: any;
   filterType: any;
 
-  constructor(private apiService: ServiceService, public dialog: MatDialog) { }
+  constructor(private apiService: ServiceService, public dialog: MatDialog ,private psidService: PsidService) { }
 
   ngOnInit(): void {
     this.plusApi();
@@ -34,12 +35,14 @@ export class MainPageComponent {
   }
 
   openDialog(movie: { nameMovie: any; language: any; overView: any; picture: any }): void {
+    const psid = this.psidService.getPsid();
   this.dialog.open(DialogMovieComponent, {
     data: {
       nameMovie: movie.nameMovie,
       language: movie.language,
       overView: movie.overView,
       picture: movie.picture,
+      psid: psid,
     }
   });
 }
