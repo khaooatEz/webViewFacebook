@@ -55,7 +55,7 @@ export class DialogMovieComponent implements OnInit {
         response => {
           console.log('Booking information sent successfully', response);
           // Use Messenger API to send a message back to the user
-          this.sendConfirmationMessage(this.data.psid, 'เสร็จสิ้นการจอง').subscribe(
+          this.sendConfirmationMessage(this.data.psid, 'ขอบคุณที่ใช้บริการ Movielnwza007').subscribe(
             res => {
               console.log('Confirmation message sent successfully', res);
               window.close(); // Close the window
