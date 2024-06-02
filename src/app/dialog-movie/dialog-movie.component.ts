@@ -31,8 +31,10 @@ export class DialogMovieComponent {
   ) {}
 
   onSubmit() {
+    console.log("onSubmit called");
     if (this.checkFormInvalid()) {
       this.formInvalid = true;
+      console.log("Form is invalid");
       return;
     } else {
       let data = {
