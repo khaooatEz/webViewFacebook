@@ -6,6 +6,7 @@ export interface form_detail {
   typeChair: string;
   chair: string;
   payMent: string;
+  psid: string; // เพิ่ม psid ใน interface
 }
 
 @Component({
@@ -19,6 +20,7 @@ export class DialogMovieComponent implements OnInit {
     typeChair: '',
     chair: '',
     payMent: '',
+    psid: '' // เพิ่ม psid ใน formDetail
   };
 
   formInvalid: boolean = false;
@@ -32,10 +34,7 @@ export class DialogMovieComponent implements OnInit {
   ngOnInit() {
     const psid = this.data.psid;
     if (psid) {
-      const psidInput = document.getElementById('psid') as HTMLInputElement;
-      if (psidInput) {
-        psidInput.value = psid;
-      }
+      this.formDetail.psid = psid; // ตั้งค่า psid ลงใน formDetail
     }
   }
 
@@ -52,15 +51,15 @@ export class DialogMovieComponent implements OnInit {
         typeChair: this.formDetail.typeChair,
         chair: this.formDetail.chair,
         payMent: this.formDetail.payMent,
-        psid: this.data.psid
+        psid: this.formDetail.psid // ส่ง psid ใน request
       };
 
       // ส่งข้อมูลกลับไปยังเซิร์ฟเวอร์
-      this.http.post('https://bbcd-2001-fb1-c4-a1b5-612b-ba62-2e7b-12e6.ngrok-free.app/optionspostback', data).subscribe(
+      this.http.post('https://your-ngrok-url.ngrok-free.app/optionspostback', data).subscribe(
         response => {
           console.log('Booking information sent successfully', response);
           // Use Messenger API to send a message back to the user
-          this.sendConfirmationMessage(this.data.psid, 'เสร็จสิ้นการจอง').subscribe(
+          this.sendConfirmationMessage(this.formDetail.psid, 'เสร็จสิ้นการจอง').subscribe(
             res => {
               console.log('Confirmation message sent successfully', res);
               window.close(); // Close the window
@@ -94,7 +93,7 @@ export class DialogMovieComponent implements OnInit {
       message: { text: message }
     };
 
-    console.log('Sending confirmation message with payload:', body);
+    console.log('Sending confirmation message with payload:', body); // Log payload for debugging
     return this.http.post(url, body);
   }
 }
