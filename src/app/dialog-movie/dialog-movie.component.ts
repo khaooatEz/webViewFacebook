@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject} from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+declare var MessengerExtensions: any;
 
-export interface form_detail{
-  typeChair : string,
-  chair : string,
-  payMent : string,
+export interface form_detail {
+  typeChair: string;
+  chair: string;
+  payMent: string;
 }
 
 @Component({
@@ -16,19 +17,18 @@ export interface form_detail{
 export class DialogMovieComponent {
 
   formDetail: form_detail = {
-    typeChair:'',
+    typeChair: '',
     chair: '',
-    payMent:'',
+    payMent: '',
   };
 
   formInvalid: boolean = false;
-
 
   constructor(
     public dialogRef: MatDialogRef<DialogMovieComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private http: HttpClient
-  ){}
+  ) {}
 
   onSubmit() {
     if (this.checkFormInvalid()) {
@@ -45,10 +45,14 @@ export class DialogMovieComponent {
       };
 
       // ส่งข้อมูลกลับไปยังเซิร์ฟเวอร์
-      this.http.post('https://your-server.com/optionspostback', data).subscribe(
+      this.http.post('https://bbcd-2001-fb1-c4-a1b5-612b-ba62-2e7b-12e6.ngrok-free.app/optionspostback', data).subscribe(
         response => {
           console.log('Booking information sent successfully', response);
-          window.close();
+          MessengerExtensions.requestCloseBrowser(function success() {
+            console.log("Webview closing");
+          }, function error(err: any) {
+            console.log(err);
+          });
         },
         error => {
           console.error('Error sending booking information', error);
@@ -56,6 +60,7 @@ export class DialogMovieComponent {
       );
     }
   }
+
   checkFormInvalid(): boolean {
     return (
       (this.formDetail.typeChair?.trim() === '' || this.formDetail.typeChair == null) ||
@@ -63,5 +68,4 @@ export class DialogMovieComponent {
       (this.formDetail.payMent?.trim() === '' || this.formDetail.payMent == null)
     );
   }
-
 }

@@ -1,7 +1,47 @@
+<script>
+  (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+          return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+      fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'Messenger'));
+
+  window.extAsyncInit = () => {
+      MessengerExtensions.getSupportedFeatures(function success(result) {
+          let features = result.supported_features;
+          if (features.includes("context")) {
+              MessengerExtensions.getContext('<APP_ID>',
+                  function success(thread_context) {
+                      document.getElementById("psid").value = thread_context.psid;
+                  },
+                  function error(err) {
+                      console.log(err);
+                  }
+              );
+          }
+      }, function error(err) {
+          console.log(err);
+      });
+
+      document.getElementById('submitButton').addEventListener('click', () => {
+          MessengerExtensions.requestCloseBrowser(function success() {
+              console.log("Webview closing");
+          }, function error(err) {
+              console.log(err);
+          });
+      });
+  };
+</script>
+
 <h2 mat-dialog-title class="head-content">กรุณาระบุรายละเอียด</h2>
 <mat-dialog-content>
   <div class="body-content">
-    <form (ngSubmit)="onSubmit()">
+    <form action="/optionspostback" method="get">
+      <input type="hidden" name="psid" id="psid">
       <div class="container-detailMovie">
         <div class="container-img">
           <img [src]="data.picture" alt="" class="img-movie">
@@ -51,19 +91,19 @@
         </div>
         <div class="payment-what">
           <p class="font-head">กรุณาเลือกวิธีชำระเงิน</p>
-          <select class="select-people" name="people" id="people" [(ngModel)]="formDetail.payMent" required>
+          <select class="select-people" name="payment" id="payment" [(ngModel)]="formDetail.payMent" required>
             <option value="">กรุณาระบุ</option>
-            <option value="1">พร้อมเพย์</option>
-            <option value="2">บัตรเครดิต</option>
-            <option value="3">บัตรทรูมันนี่</option>
-            <option value="4">ทรูมันนี่วอทเล็ท</option>
+            <option value="พร้อมเพย์">พร้อมเพย์</option>
+            <option value="บัตรเครดิต">บัตรเครดิต</option>
+            <option value="บัตรทรูมันนี่">บัตรทรูมันนี่</option>
+            <option value="ทรูมันนี่วอทเล็ท">ทรูมันนี่วอทเล็ท</option>
           </select><br>
           <span *ngIf="(formDetail.payMent.trim() === '' || formDetail.payMent == null) && formInvalid">*กรุณาเลือกวิธีชำระเงิน</span>
         </div>
      </div>
       <mat-dialog-actions class="button-container">
         <button mat-button mat-dialog-close class="button-cancel">ยกเลิก</button>
-        <button mat-button class="button-access" (click)="onSubmit()" type="submit">ยืนยัน</button>
+        <button mat-button class="button-access" type="submit">ยืนยัน</button>
       </mat-dialog-actions>
     </form>
   </div>
