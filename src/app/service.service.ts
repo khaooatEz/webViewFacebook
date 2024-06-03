@@ -11,13 +11,18 @@ export class ServiceService {
 
   constructor(private http: HttpClient) {}
 
-  getApi(id:number) {
-    // const url = `${this.apiUrl}?api_key=${this.apiKey}&page=${id}`;
-    const params = new HttpParams().set('api_key',this.apiKey);
+  getApi(id: number): Observable<any> {
+    const params = new HttpParams().set('api_key', this.apiKey);
     return this.http.get<any>(`${this.apiUrl}?page=${id}`, { params });
-    // console.log('dsadsadsa: ', url)
-    // return this.http.get(params);
-   }
+  }
+
+  // getApi(id:number) {
+  //   // const url = `${this.apiUrl}?api_key=${this.apiKey}&page=${id}`;
+  //   const params = new HttpParams().set('api_key',this.apiKey);
+  //   return this.http.get<any>(`${this.apiUrl}?page=${id}`, { params });
+  //   // console.log('dsadsadsa: ', url)
+  //   // return this.http.get(params);
+  //  }
 
   //  getMultiplePages(startPage: number, endPage: number): Observable<any[]> {
   //   let observables: Observable<any>[] = [];

@@ -50,7 +50,6 @@ export class DialogMovieComponent implements OnInit {
 
       console.log("Submitting data:", data);
 
-      // ส่งข้อมูลกลับไปยังเซิร์ฟเวอร์
       this.http.post('https://bbcd-2001-fb1-c4-a1b5-612b-ba62-2e7b-12e6.ngrok-free.app/optionspostback', data).subscribe(
         response => {
           console.log('Booking information sent successfully', response);
