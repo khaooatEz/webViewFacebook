@@ -45,7 +45,7 @@ export class DialogMovieComponent implements OnInit {
         typeChair: this.formDetail.typeChair,
         chair: this.formDetail.chair,
         payMent: this.formDetail.payMent,
-        psid: this.data.psid // ใช้ psid จาก data
+        psid: this.data.psid
       };
 
       console.log("Submitting data:", data);
@@ -54,15 +54,14 @@ export class DialogMovieComponent implements OnInit {
       this.http.post('https://bbcd-2001-fb1-c4-a1b5-612b-ba62-2e7b-12e6.ngrok-free.app/optionspostback', data).subscribe(
         response => {
           console.log('Booking information sent successfully', response);
-          // Use Messenger API to send a message back to the user
           this.sendConfirmationMessage(this.data.psid, 'ขอบคุณที่ใช้บริการ Movielnwza007').subscribe(
             res => {
               console.log('Confirmation message sent successfully', res);
-              window.close(); // Close the window
+              window.close();
             },
             err => {
               console.error('Error sending confirmation message', err);
-              window.close(); // Close the window even if there is an error
+              window.close();
             }
           );
         },
