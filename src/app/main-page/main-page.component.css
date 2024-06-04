@@ -187,6 +187,10 @@ body {
   .text-search {
     width: 17rem;
   }
+
+  .search-content{
+    gap: 0.7rem;
+  }
   
 }
 .image-Movie {
